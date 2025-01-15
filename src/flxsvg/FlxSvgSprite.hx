@@ -9,6 +9,8 @@ import format.svg.SVGRenderer;
 import openfl.geom.Matrix;
 import openfl.display.Shape;
 
+using StringTools;
+
 /**
  * A sprite that supports rendering Scalable Vector Graphics (SVG) within HaxeFlixel.
  * This class uses OpenFL to render SVG content into a Flixel sprite, allowing for scalable,
@@ -107,7 +109,7 @@ class FlxSvgSprite extends FlxSprite
 		{
 			final xmlData:Xml = svgData.getXml();
 
-			if (xmlData.firstElement() != null && xmlData.firstElement().nodeName != 'svg' && xmlData.firstElement().nodeName != 'svg:svg')
+			if (xmlData.firstElement() != null && !['svg', 'svg:svg'].contains(xmlData.firstElement().nodeName))
 			{
 				FlxG.log.error('Not an SVG file (${xmlData.firstElement().nodeName})');
 				return this;
